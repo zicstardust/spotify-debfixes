@@ -11,7 +11,7 @@ fi
 
 if [ $"$option" == "--uninstall" ]; then
     rm -Rf /usr/share/spotifyffmpeg
-    #rm -f /usr/local/bin/spotify-ffmpegfix
+    rm -f /usr/local/bin/spotify-ffmpegfix #Remove old version
     rm -f /usr/local/bin/spotify-debfixes
     rm -f /usr/bin/spotify
     ln -s /usr/share/spotify/spotify /usr/bin/spotify
@@ -19,6 +19,8 @@ if [ $"$option" == "--uninstall" ]; then
     echo "Spotify DEB Fixes uninstalled!"
     exit 0
 fi
+
+rm -f /usr/local/bin/spotify-ffmpegfix #Remove old version
 
 mkdir -p /usr/local/bin
 curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install.sh > /usr/local/bin/spotify-debfixes
