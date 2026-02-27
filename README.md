@@ -13,6 +13,7 @@ This script includes enhancements and fixes to official .DEB:
 ## Install
 
 ### Dependecies
+- spotify-client (official .deb)
 - curl
 - bash
 - tar
