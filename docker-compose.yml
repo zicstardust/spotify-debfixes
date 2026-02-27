@@ -2,6 +2,7 @@ services:
   ffmpeg-spotify:
     container_name: ffmpeg-spotify
     image: ffmpeg-spotify:latest
+    plataform: linux/amd64
     build: .
     env_file: .env
     volumes:
