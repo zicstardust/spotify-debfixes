@@ -11,22 +11,23 @@ fi
 
 if [ $"$option" == "--uninstall" ]; then
     rm -Rf /usr/share/spotifyffmpeg
-    rm -f /usr/local/bin/spotify-ffmpegfix
+    #rm -f /usr/local/bin/spotify-ffmpegfix
+    rm -f /usr/local/bin/spotify-debfixes
     rm -f /usr/bin/spotify
     ln -s /usr/share/spotify/spotify /usr/bin/spotify
     chmod +x /usr/bin/spotify
-    echo "Spotify Fix FFMPEG uninstalled!"
+    echo "Spotify DEB Fixes uninstalled!"
     exit 0
 fi
 
 mkdir -p /usr/local/bin
-curl https://raw.githubusercontent.com/zicstardust/ffmpeg-spotify/main/install.sh > /usr/local/bin/spotify-ffmpegfix
-chmod +x /usr/local/bin/spotify-ffmpegfix
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install.sh > /usr/local/bin/spotify-debfixes
+chmod +x /usr/local/bin/spotify-debfixes
 
 rm -Rf /usr/share/spotifyffmpeg
 mkdir -p /usr/share/spotifyffmpeg
 cd /usr/share/spotifyffmpeg
-curl -fSL "https://github.com/zicstardust/ffmpeg-spotify/releases/download/1.0/spotify_ffmpeg_libs_linux_x86_64.tar.gz" -o spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
+curl -fSL "https://github.com/zicstardust/spotify-debfixes/releases/download/1.0/spotify_ffmpeg_libs_linux_x86_64.tar.gz" -o spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
 tar -xf spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
 rm -f spotify_ffmpeg_libs_linux_x86_64.tar.gz
 chmod -R +x *
@@ -64,4 +65,4 @@ chmod +x /usr/bin/spotify
 
 cd $current_dir
 
-echo "Spotify Fix FFMPEG installed!"
+echo "Spotify DEB Fixes installed!"

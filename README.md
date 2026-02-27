@@ -1,6 +1,10 @@
-# FFMPEG Libraries to Spotify Linux Client
+# Spotify Linux Client .DEB fixes
 
-FFMPEG libraries for the native Linux Spotify client. To resolve the issue of playing local files on distributions that do not have the correct version of the FFMPEG libraries.
+
+This script includes enhancements and fixes to official .DEB:
+- Built-in FFMPEG libraries for playing local files
+- Persistent flags configuration file
+- Persistent environment variables configuration file
 
 ## Tested on:
 - Debian (official .deb package)
@@ -12,10 +16,11 @@ FFMPEG libraries for the native Linux Spotify client. To resolve the issue of pl
 - curl
 - bash
 - tar
+- grep
 
 ### Install
 ```sh
-curl https://raw.githubusercontent.com/zicstardust/ffmpeg-spotify/main/install.sh > /tmp/spotifyFFMPEG.sh; sudo bash /tmp/spotifyFFMPEG.sh
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install.sh > /tmp/spotify-debfixes.sh; sudo bash /tmp/spotify-debfixes.sh
 ```
 
 ## Usage
@@ -54,5 +59,5 @@ WAYLAND_DISPLAY=
 
 ### Uninstall
 ```sh
-spotify-ffmpegfix --uninstall
+spotify-debfixes --uninstall
 ```
