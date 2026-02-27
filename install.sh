@@ -49,7 +49,7 @@ if [ ! -f ${HOME}/.config/spotify/spotify.env ]; then
 fi
 
 mapfile -t FLAGS <<< "$(grep -v -E '^\s*$|^#' "${HOME}/.config/spotify/spotify-flags.conf")"
-mapfile -t ENVS <<< "$(grep -v -E '^\s*$|^#' "${HOME}/.config/spotify/spotify.env")"
+mapfile -t ENVS <<< "$(grep -v -E '^\s*$|^#|^[^=]*$' "${HOME}/.config/spotify/spotify.env")"
 
 if [[ -z ${ENVS[0]} ]]; then
     exec /usr/share/spotify/spotify \
