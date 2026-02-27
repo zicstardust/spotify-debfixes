@@ -1,2 +1,2 @@
-data/
-.env
+build-ffmpeg/data/
+build-ffmpeg/.env
