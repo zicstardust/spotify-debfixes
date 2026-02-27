@@ -51,15 +51,15 @@ fi
 mapfile -t FLAGS <<< "$(grep -v -E '^\s*$|^#' "${HOME}/.config/spotify/spotify-flags.conf")"
 mapfile -t ENVS <<< "$(grep -v -E '^\s*$|^#' "${HOME}/.config/spotify/spotify.env")"
 
-if [[ -z \${ENVS[0]} ]]; then
-    exec /usr/share/spotify/spotify \\
-        "\${FLAGS[@]}" \\
-        "\$@"
+if [[ -z ${ENVS[0]} ]]; then
+    exec /usr/share/spotify/spotify \
+        "${FLAGS[@]}" \
+        "$@"
 else
-    exec env "\${ENVS[@]}" \\
-        /usr/share/spotify/spotify \\
-        "\${FLAGS[@]}" \\
-        "\$@"
+    exec env "${ENVS[@]}" \
+        /usr/share/spotify/spotify \
+        "${FLAGS[@]}" \
+        "$@"
 fi
 
 EXEC
