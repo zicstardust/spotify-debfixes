@@ -30,7 +30,7 @@ fi
 
 #Install spotify-debfixes
 mkdir -p /usr/local/bin
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/install.sh > /usr/local/bin/spotify-debfixes
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/refs/heads/${BRANCH}/install.sh > /usr/local/bin/spotify-debfixes
 chmod +x /usr/local/bin/spotify-debfixes
 
 
@@ -51,18 +51,18 @@ if [ -f /usr/bin/spotify ]; then
     rm -f /usr/bin/spotify
 fi
 
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotify-bin.sh > /usr/bin/spotify
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/refs/heads/${BRANCH}/src/spotify-bin.sh > /usr/bin/spotify
 chmod +x /usr/bin/spotify
 
 
 #Install script hook
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotifydebfixes-hook.sh > /usr/share/spotifydebfixes-hook.sh
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/refs/heads/${BRANCH}/src/spotifydebfixes-hook.sh > /usr/share/spotifydebfixes-hook.sh
 chmod +x /usr/share/spotifydebfixes-hook.sh
 
 
 # Install apt hook
 mkdir -p /etc/apt/apt.conf.d
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/99spotify-debfixes > /etc/apt/apt.conf.d/99spotify-debfixes
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/refs/heads/${BRANCH}/src/99spotify-debfixes > /etc/apt/apt.conf.d/99spotify-debfixes
 
 
 
