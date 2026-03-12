@@ -2,10 +2,10 @@
 
 PKG="spotify-client"
 
-if grep -q "install $PKG" /var/log/dpkg.log || grep -q "upgrade $PKG" /var/log/dpkg.log; then
+if tail -n 50 /var/log/dpkg.log | grep -q "upgrade $PKG\|install $PKG"; then
     /usr/local/bin/spotify-debfixes
     #echo "Spotify DEB Fixes installed!"
-#elif grep -q "remove $PKG" /var/log/dpkg.log || grep -q "purge $PKG" /var/log/dpkg.log; then
+#elif tail -n 50 /var/log/dpkg.log | grep -q "remove $PKG\|purge $PKG"; then
 #    /usr/local/bin/spotify-debfixes --uninstall
     #echo "Spotify DEB Fixes uninstalled!"
 fi
