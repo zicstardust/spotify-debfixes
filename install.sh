@@ -62,7 +62,7 @@ chmod +x /usr/share/spotifydebfixes-hook.sh
 
 # Install apt hook
 mkdir -p /etc/apt/apt.conf.d
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/99spotify-debfixes> /etc/apt/apt.conf.d/99spotify-debfixes
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/99spotify-debfixes > /etc/apt/apt.conf.d/99spotify-debfixes
 
 
 
