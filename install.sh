@@ -47,6 +47,10 @@ chmod -R +x /usr/share/spotifyffmpeg/*
 
 
 #Install spotify-bin
+if [ -f /usr/bin/spotify ]; then
+    rm -f /usr/bin/spotify
+fi
+
 curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotify-bin.sh > /usr/bin/spotify
 chmod +x /usr/bin/spotify
 
