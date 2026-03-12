@@ -14,7 +14,7 @@ fi
 if [ $"$option" == "--uninstall" ]; then
     rm -Rf /usr/share/spotifyffmpeg
     rm -f /usr/local/bin/spotify-debfixes
-    rm -f /usr/share/spotifyffmpeg-hook.sh
+    rm -f /usr/share/spotifydebfixes-hook.sh
     rm -f /etc/apt/apt.conf.d/99-spotifydebfixes
     rm -f /usr/bin/spotify
     ln -s /usr/share/spotify/spotify /usr/bin/spotify
@@ -56,8 +56,8 @@ chmod +x /usr/bin/spotify
 
 
 #Install script hook
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotifyffmpeg-hook.sh > /usr/share/spotifyffmpeg-hook.sh
-chmod +x /usr/share/spotifyffmpeg-hook.sh
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotifydebfixes-hook.sh > /usr/share/spotifydebfixes-hook.sh
+chmod +x /usr/share/spotifydebfixes-hook.sh
 
 
 # Install apt hook
