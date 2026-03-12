@@ -17,8 +17,12 @@ if [ $"$option" == "--uninstall" ]; then
     rm -f /usr/share/spotifydebfixes-hook.sh
     rm -f /etc/apt/apt.conf.d/99spotify-debfixes
     rm -f /usr/bin/spotify
-    ln -s /usr/share/spotify/spotify /usr/bin/spotify
-    chmod +x /usr/bin/spotify
+    
+    if [ -f /usr/share/spotify/spotify ]; then
+        ln -s /usr/share/spotify/spotify /usr/bin/spotify
+        chmod +x /usr/bin/spotify
+    fi
+
     echo "Spotify DEB Fixes uninstalled!"
     exit 0
 elif [ $"$option" != "" ]; then
