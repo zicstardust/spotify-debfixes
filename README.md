@@ -1,7 +1,7 @@
 # Spotify Linux Client .DEB fixes
 
 
-This script includes enhancements and fixes to official .DEB:
+This script includes enhancements and fixes to Spotify official .DEB:
 - Built-in FFMPEG libraries for playing local files
 - Persistent flags configuration file
 - Persistent environment variables configuration file
@@ -12,7 +12,7 @@ This script includes enhancements and fixes to official .DEB:
 
 ## Install
 
-### Dependecies
+### Dependencies
 - spotify-client (official .deb)
 - curl
 - bash
