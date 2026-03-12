@@ -13,6 +13,8 @@ if [ $"$option" == "--uninstall" ]; then
     rm -Rf /usr/share/spotifyffmpeg
     rm -f /usr/local/bin/spotify-ffmpegfix #Remove old version
     rm -f /usr/local/bin/spotify-debfixes
+    rm -f /usr/share/spotifyffmpeg-hook.sh
+    rm -f /etc/apt/apt.conf.d/99-spotifydebfixes
     rm -f /usr/bin/spotify
     ln -s /usr/share/spotify/spotify /usr/bin/spotify
     chmod +x /usr/bin/spotify
@@ -64,6 +66,28 @@ fi
 
 EXEC
 chmod +x /usr/bin/spotify
+
+
+mkdir -p /etc/apt/apt.conf.d
+rm -f /etc/apt/apt.conf.d/99-spotifydebfixes
+cat > /etc/apt/apt.conf.d/99-spotifydebfixes <<"APTHOOK"
+DPkg::Post-Invoke {"/usr/share/spotifyffmpeg-hook.sh";};
+APTHOOK
+
+#mkdir -p /usr/share
+rm -f /usr/share/spotifyffmpeg-hook.sh
+cat > /usr/share/spotifyffmpeg-hook.sh <<"SCRIPTHOOK"
+#!/usr/bin/bash
+
+PKG="spotify-client"
+
+if grep -q "install $PKG" /var/log/dpkg.log || grep -q "upgrade $PKG" /var/log/dpkg.log; then
+    /usr/local/bin/spotify-debfixes
+    echo "Spotify DEB Fixes installed!"
+fi
+SCRIPTHOOK
+
+chmod +x /usr/share/spotifyffmpeg-hook.sh
 
 cd $current_dir
 
