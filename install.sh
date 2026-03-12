@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 option=$1
-current_dir=$(pwd)
+
+set -e
+: "${BRANCH:=main}"
 
 #Check root
 if [ "$(whoami)" != "root" ]; then
@@ -11,7 +13,6 @@ fi
 
 if [ $"$option" == "--uninstall" ]; then
     rm -Rf /usr/share/spotifyffmpeg
-    rm -f /usr/local/bin/spotify-ffmpegfix #Remove old version
     rm -f /usr/local/bin/spotify-debfixes
     rm -f /usr/share/spotifyffmpeg-hook.sh
     rm -f /etc/apt/apt.conf.d/99-spotifydebfixes
@@ -20,75 +21,45 @@ if [ $"$option" == "--uninstall" ]; then
     chmod +x /usr/bin/spotify
     echo "Spotify DEB Fixes uninstalled!"
     exit 0
+elif [ $"$option" != "" ]; then
+    echo "Unknown option: $option"
+    echo "Usage: $0 [--uninstall]"
+    exit 1
 fi
 
-rm -f /usr/local/bin/spotify-ffmpegfix #Remove old version
 
+#Install spotify-debfixes
 mkdir -p /usr/local/bin
-curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install.sh > /usr/local/bin/spotify-debfixes
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/install.sh > /usr/local/bin/spotify-debfixes
 chmod +x /usr/local/bin/spotify-debfixes
 
-rm -Rf /usr/share/spotifyffmpeg
+
+
+#Install ffmpeg libs
+if [ -d /usr/share/spotifyffmpeg ]; then
+    rm -Rf /usr/share/spotifyffmpeg
+fi
 mkdir -p /usr/share/spotifyffmpeg
-cd /usr/share/spotifyffmpeg
 curl -fSL "https://github.com/zicstardust/spotify-debfixes/releases/download/1.0/spotify_ffmpeg_libs_linux_x86_64.tar.gz" -o spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
-tar -xf spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
+tar -xzf spotify_ffmpeg_libs_linux_x86_64.tar.gz -C /usr/share/spotifyffmpeg/ &> /dev/null
 rm -f spotify_ffmpeg_libs_linux_x86_64.tar.gz
-chmod -R +x *
+chmod -R +x /usr/share/spotifyffmpeg/*
 
 
-rm -f /usr/bin/spotify
-cat > /usr/bin/spotify <<"EXEC"
-#!/usr/bin/bash
-export LD_LIBRARY_PATH="/usr/share/spotifyffmpeg${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-
-if [ ! -f ${HOME}/.config/spotify/spotify-flags.conf ]; then
-    touch "${HOME}/.config/spotify/spotify-flags.conf" &> /dev/null
-fi
-
-if [ ! -f ${HOME}/.config/spotify/spotify.env ]; then
-    touch "${HOME}/.config/spotify/spotify.env" &> /dev/null
-fi
-
-mapfile -t FLAGS <<< "$(grep -v -E '^\s*$|^#' "${HOME}/.config/spotify/spotify-flags.conf")"
-mapfile -t ENVS <<< "$(grep -v -E '^\s*$|^#|^[^=]*$' "${HOME}/.config/spotify/spotify.env")"
-
-if [[ -z ${ENVS[0]} ]]; then
-    exec /usr/share/spotify/spotify \
-        "${FLAGS[@]}" \
-        "$@"
-else
-    exec env "${ENVS[@]}" \
-        /usr/share/spotify/spotify \
-        "${FLAGS[@]}" \
-        "$@"
-fi
-
-EXEC
+#Install spotify-bin
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotify-bin.sh > /usr/bin/spotify
 chmod +x /usr/bin/spotify
 
 
-mkdir -p /etc/apt/apt.conf.d
-rm -f /etc/apt/apt.conf.d/99-spotifydebfixes
-cat > /etc/apt/apt.conf.d/99-spotifydebfixes <<"APTHOOK"
-DPkg::Post-Invoke {"/usr/share/spotifyffmpeg-hook.sh";};
-APTHOOK
-
-#mkdir -p /usr/share
-rm -f /usr/share/spotifyffmpeg-hook.sh
-cat > /usr/share/spotifyffmpeg-hook.sh <<"SCRIPTHOOK"
-#!/usr/bin/bash
-
-PKG="spotify-client"
-
-if grep -q "install $PKG" /var/log/dpkg.log || grep -q "upgrade $PKG" /var/log/dpkg.log; then
-    /usr/local/bin/spotify-debfixes
-    echo "Spotify DEB Fixes installed!"
-fi
-SCRIPTHOOK
-
+#Install script hook
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/spotifyffmpeg-hook.sh > /usr/share/spotifyffmpeg-hook.sh
 chmod +x /usr/share/spotifyffmpeg-hook.sh
 
-cd $current_dir
+
+# Install apt hook
+mkdir -p /etc/apt/apt.conf.d
+curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/${BRANCH}/src/99-spotifydebfixes > /etc/apt/apt.conf.d/99-spotifydebfixes
+
+
 
 echo "Spotify DEB Fixes installed!"
