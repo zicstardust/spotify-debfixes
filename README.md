@@ -10,26 +10,30 @@ This script includes enhancements and fixes to Spotify official .DEB:
 - Debian (official .deb package)
 - Ubuntu (official .deb package)
 
-## Install
-
-### Dependencies
+## Dependencies
 - spotify-client (official .deb)
 - curl
 - bash
 - tar
 - grep
 
-### Install
+## Install
 ```sh
 curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install.sh > /tmp/spotify-debfixes.sh; sudo bash /tmp/spotify-debfixes.sh
 ```
 
-## Usage
 After installation, Spotify is already fixed.
-Whenever the spotify package updates, it will be necessary to run the command:
+
+Whenever the `spotify-client` package is updated, a hook will be automatically triggered to apply the fixes.
+
+## Uninstall
+It will remove all the fixes.
+
 ```sh
-spotify-debfixes
+spotify-debfixes --uninstall
 ```
+
+## Usage
 
 ### Making flags persistent
 
@@ -55,10 +59,4 @@ Below is an example spotify.env file that defines the environment variables WAYL
 
 # This line will be ignored.
 WAYLAND_DISPLAY=
-```
-
-
-### Uninstall
-```sh
-spotify-debfixes --uninstall
 ```
