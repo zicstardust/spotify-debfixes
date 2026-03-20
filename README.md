@@ -24,7 +24,11 @@ curl https://raw.githubusercontent.com/zicstardust/spotify-debfixes/main/install
 
 After installation, Spotify is already fixed.
 
-Whenever the `spotify-client` package is updated, a hook will be automatically triggered to apply the fixes.
+Whenever the spotify package updates, it will be necessary to run the command:
+
+```sh
+spotify-debfixes
+```
 
 ## Uninstall
 It will remove all the fixes.
