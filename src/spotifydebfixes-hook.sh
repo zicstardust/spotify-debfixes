@@ -5,7 +5,7 @@ NOCOLOR='\033[0m'
 
 PKG="spotify-client"
 
-LAST_LINE=$(grep "$PKG" /var/log/dpkg.log | tail -n1)
+LAST_LINE=$(grep "$PKG" /var/log/dpkg.log | grep "$(date +%Y-%M-%d)" | tail -n1)
 
 #if echo "$LAST_LINE" | grep -q "upgrade $PKG\|install $PKG"; then
 if echo "$LAST_LINE" | grep -q "status installed $PKG"; then
