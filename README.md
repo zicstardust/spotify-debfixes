@@ -16,6 +16,7 @@ This script includes enhancements and fixes to Spotify official .DEB:
 - bash
 - tar
 - grep
+- tail
 
 ## Install
 ```sh
@@ -45,9 +46,6 @@ Flag file `~/.config/spotify/spotify-flags.conf`
 
 Below is an example spotify-flags.conf file that defines the flags --force-device-scale-factor:
 ```conf
-
-~/.config/spotify/spotify-flags.conf
-
 # This line will be ignored.
 --force-device-scale-factor=1.5
 ```
@@ -58,9 +56,6 @@ Flag file `~/.config/spotify/spotify.env`
 
 Below is an example spotify.env file that defines the environment variables WAYLAND_DISPLAY
 ```conf
-
-~/.config/spotify/spotify.env
-
 # This line will be ignored.
 WAYLAND_DISPLAY=
 ```
