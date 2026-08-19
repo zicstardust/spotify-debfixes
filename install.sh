@@ -44,7 +44,7 @@ if [ -d /usr/share/spotifyffmpeg ]; then
     rm -Rf /usr/share/spotifyffmpeg
 fi
 mkdir -p /usr/share/spotifyffmpeg
-curl -fSL "https://github.com/zicstardust/spotify-debfixes/releases/download/7.1.5/spotify_ffmpeg_libs_linux_x86_64.tar.gz" -o spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
+curl -fSL "https://github.com/zicstardust/spotify-ffmpeg-libs/releases/download/v7.1.5/spotify-ffmpeg-7.1.5-libs-linux-x86_64.tar.gz" -o spotify_ffmpeg_libs_linux_x86_64.tar.gz &> /dev/null
 tar -xzf spotify_ffmpeg_libs_linux_x86_64.tar.gz -C /usr/share/spotifyffmpeg/ &> /dev/null
 rm -f spotify_ffmpeg_libs_linux_x86_64.tar.gz
 chmod -R +x /usr/share/spotifyffmpeg/*
