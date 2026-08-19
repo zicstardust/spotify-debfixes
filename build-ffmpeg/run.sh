@@ -2,13 +2,15 @@
 
 #https://ffmpeg.org/download.html#releases
 #Versions compatible with Spotify:
+#7.1.5 - libavcodec61, libavformat61
+#6.1.6 - libavcodec60, libavformat60
 #4.4.6 - libavcodec58, libavformat58
-#3.4.14 - libavcodec57, libavformat57
-#2.8.22 - libavcodec56, libavformat56
-#1.2.12 - libavcodec54, libavformat54
+#3.4.14 - libavcodec57, libavformat57 #No longer compatible with the current client
+#2.8.22 - libavcodec56, libavformat56 #No longer compatible with the current client
+#1.2.12 - libavcodec54, libavformat54 #No longer compatible with the current client
 
 set -e
-: "${FFMPEG_VERSION:=4.4.6}"
+: "${FFMPEG_VERSION:=7.1.5}"
 
 TAR_FORMAT="gz"
 #TAR_FORMAT="xz"
